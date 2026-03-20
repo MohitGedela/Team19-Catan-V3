@@ -1,6 +1,6 @@
 package code;
 
-public class SpendingCards implements Rule {
+public class SpendingCards implements Strategy {
     private final double VALUE = 0.5;
     private final int MAX_CARDS = 5;
 

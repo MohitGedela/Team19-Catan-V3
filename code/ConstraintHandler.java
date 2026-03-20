@@ -2,6 +2,10 @@ package code;
 
 import java.util.List;
 
+/**
+ * R3.3 — Chain of Responsibility: each handler tries its condition; if it does not apply, it forwards
+ * to {@link #next} via {@link #handle(Player, Board, List)}. Wired in {@link ComputerPlayer#takeAction}.
+ */
 abstract class ConstraintHandler {
 
     private ConstraintHandler next;

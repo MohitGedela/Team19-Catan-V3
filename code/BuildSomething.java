@@ -1,6 +1,6 @@
 package code;
 
-public class BuildSomething implements Rule {
+public class BuildSomething implements Strategy {
 
     private static final double VALUE = 0.8;
 

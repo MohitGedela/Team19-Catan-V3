@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+/** Invoker for R3.1: parses input to {@link Command}, executes, and drives undo/redo via {@link CommandHistory}. */
 class HumanPlayer extends Player {
 
     private ParseCommand parser;

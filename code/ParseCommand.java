@@ -1,5 +1,6 @@
 package code;
 
+/** R3.1 — factory/parser: maps user text to concrete {@link Command} instances. */
 class ParseCommand {
 
     public Command parse(String input, Player player, Board board, Turn turn) {

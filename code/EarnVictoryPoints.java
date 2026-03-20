@@ -1,6 +1,6 @@
 package code;
 
-public class EarnVictoryPoints implements Rule {
+public class EarnVictoryPoints implements Strategy {
 
     private static final double VALUE = 1.0;
 

@@ -1,5 +1,10 @@
 package code;
 
+/**
+ * R3.1 — Command pattern: encapsulates a player action as an object with {@link #execute()},
+ * {@link #undo()}, and metadata ({@link #endsTurn()}, {@link #requiresRoll()}, {@link #canUndo()}).
+ * {@link HumanPlayer} uses {@link CommandHistory} for undo/redo; {@link ParseCommand} builds commands from text.
+ */
 abstract class Command {
     protected Player player;
     protected Board board;

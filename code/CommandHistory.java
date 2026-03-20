@@ -2,6 +2,7 @@ package code;
 
 import java.util.Stack;
 
+/** R3.1 — stores executed commands for undo/redo (used by {@link HumanPlayer}). */
 class CommandHistory {
     private Stack<Command> undoStack = new Stack<>();
     private Stack<Command> redoStack = new Stack<>();
