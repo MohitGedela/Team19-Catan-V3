@@ -1,9 +1,11 @@
+package code;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
 class Visualizer {
-    
+
     // Colours Valid for the Visualizer
     private static final String[] PLAYER_COLORS = { "RED", "BLUE", "ORANGE", "WHITE" };
     private String filePath;
@@ -34,7 +36,8 @@ class Visualizer {
         for (Player player : players) {
             String color = PLAYER_COLORS[player.getPlayerID() - 1];
             for (Road road : player.getPlayerRoads()) {
-                if (!firstRoad) json.append(",\n");
+                if (!firstRoad)
+                    json.append(",\n");
                 int a = road.getLocation().getStart();
                 int b = road.getLocation().getEnd();
                 json.append("    { \"a\": " + a + ", \"b\": " + b + ", \"owner\": \"" + color + "\" }");
@@ -52,9 +55,11 @@ class Visualizer {
                 Intersection intersection = board.getIntersection(i);
                 Building building = intersection.getBuilding();
                 if (building != null && building.getOwner() == player) {
-                    if (!firstBuilding) json.append(",\n");
+                    if (!firstBuilding)
+                        json.append(",\n");
                     String type = building.getBuildingType().name();
-                    json.append("    { \"node\": " + i + ", \"owner\": \"" + color + "\", \"type\": \"" + type + "\" }");
+                    json.append(
+                            "    { \"node\": " + i + ", \"owner\": \"" + color + "\", \"type\": \"" + type + "\" }");
                     firstBuilding = false;
                 }
             }

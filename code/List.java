@@ -1,3 +1,5 @@
+package code;
+
 class List extends Command {
 
     List(Player player, Board board, Turn turn) {
@@ -16,17 +18,23 @@ class List extends Command {
                 first = false;
             }
         }
-        if (first) sb.append("(empty)");
+        if (first)
+            sb.append("(empty)");
         System.out.println(turn.formatAction(player, sb.toString()));
         return true;
     }
 
     @Override
-    public void undo() {}
+    public void undo() {
+    }
 
     @Override
-    public boolean endsTurn() { return false; }
+    public boolean endsTurn() {
+        return false;
+    }
 
     @Override
-    public boolean requiresRoll() { return true; }
+    public boolean requiresRoll() {
+        return true;
+    }
 }

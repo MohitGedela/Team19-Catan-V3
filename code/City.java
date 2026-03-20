@@ -1,3 +1,5 @@
+package code;
+
 class City extends Building {
 
     public City(Intersection cityIntersection, Player owner) {

@@ -1,3 +1,4 @@
+package code;
 class PlaceInitialRoad extends Command {
     private int startNode;
     private int endNode;
@@ -26,6 +27,11 @@ class PlaceInitialRoad extends Command {
             board.removeRoad(lastStart, lastEnd, player);
             System.out.println("Undid initial road from " + lastStart + " to " + lastEnd);
         }
+    }
+
+    @Override
+    public boolean canUndo() {
+        return true;
     }
 
     @Override

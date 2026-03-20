@@ -1,3 +1,5 @@
+package code;
+
 class PlaceInitialSettlement extends Command {
     private int nodeID;
 
@@ -31,12 +33,17 @@ class PlaceInitialSettlement extends Command {
     }
 
     @Override
+    public boolean canUndo() {
+        return true;
+    }
+
+    @Override
     public boolean endsTurn() { 
         return false; 
     }
 
     @Override
-    public boolean requiresRoll() { 
-        return false; 
+    public boolean requiresRoll() {
+        return false;
     }
 }

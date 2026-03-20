@@ -1,5 +1,7 @@
+package code;
+
 abstract class Building {
-    
+
     public enum BuildingType {
         SETTLEMENT,
         CITY

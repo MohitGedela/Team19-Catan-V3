@@ -1,3 +1,4 @@
+package code;
 enum ResourceType {
     WOOD,
     BRICK,

@@ -1,17 +1,39 @@
+package code;
+
 import java.util.Stack;
 
 class CommandHistory {
-    private Stack<Command> history = new Stack<>();
+    private Stack<Command> undoStack = new Stack<>();
+    private Stack<Command> redoStack = new Stack<>();
 
     public void push(Command c) {
-        this.history.push(c);
+        undoStack.push(c);
+        redoStack.clear();
     }
 
-    public Command pop() {
-        return this.history.pop();
+    public Command undoPop() {
+        if (undoStack.isEmpty()) return null;
+        Command c = undoStack.pop();
+        redoStack.push(c);
+        return c;
+    }
+
+    public Command redoPop() {
+        if (redoStack.isEmpty()) return null;
+        Command c = redoStack.pop();
+        undoStack.push(c);
+        return c;
+    }
+
+    public boolean canUndo() {
+        return !undoStack.isEmpty();
+    }
+
+    public boolean canRedo() {
+        return !redoStack.isEmpty();
     }
 
     public boolean isEmpty() {
-        return this.history.isEmpty();
+        return undoStack.isEmpty();
     }
 }

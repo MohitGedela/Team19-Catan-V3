@@ -1,3 +1,5 @@
+package code;
+
 class Go extends Command {
 
     Go(Player player, Board board, Turn turn) {
@@ -10,15 +12,16 @@ class Go extends Command {
     }
 
     @Override
-    public void undo() {}
-
-    @Override
-    public boolean endsTurn() { 
-        return true; 
+    public void undo() {
     }
 
     @Override
-    public boolean requiresRoll() { 
-        return true; 
+    public boolean endsTurn() {
+        return true;
+    }
+
+    @Override
+    public boolean requiresRoll() {
+        return true;
     }
 }

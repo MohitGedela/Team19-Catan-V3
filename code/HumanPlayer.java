@@ -1,3 +1,5 @@
+package code;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -20,20 +22,33 @@ class HumanPlayer extends Player {
 
     private boolean executeCommand(Command command) {
         if (command.execute()) {
-            history.push(command);
+            if (command.canUndo()) {
+                history.push(command);
+            }
             return true;
         }
         return false;
     }
 
     private void undo() {
-        if (history.isEmpty()) {
+        if (!history.canUndo()) {
             System.out.println("Nothing to undo.");
             return;
         }
-        Command command = history.pop();
+        Command command = history.undoPop();
         if (command != null) {
             command.undo();
+        }
+    }
+
+    private void redo() {
+        if (!history.canRedo()) {
+            System.out.println("Nothing to redo.");
+            return;
+        }
+        Command command = history.redoPop();
+        if (command != null) {
+            command.execute();
         }
     }
 
@@ -51,11 +66,17 @@ class HumanPlayer extends Player {
             System.out.println("Build city [nodeID]");
             System.out.println("Build road [fromNodeID] [toNodeID]");
             System.out.println("Undo");
+            System.out.println("Redo");
 
             String input = scanner.nextLine().trim();
 
             if (input.equalsIgnoreCase("Undo")) {
                 undo();
+                continue;
+            }
+
+            if (input.equalsIgnoreCase("Redo")) {
+                redo();
                 continue;
             }
 
