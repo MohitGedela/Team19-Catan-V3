@@ -113,4 +113,43 @@ class Build extends Command {
     public boolean requiresRoll() {
         return true;
     }
+
+    @Override
+    public void undo() {
+        if (lastAction.equals("settlement")) {
+            Intersection spot = board.getIntersection(lastNode);
+            spot.setBuilding(null);
+            spot.setOwner(null);
+            player.getPlayerBuildings().removeIf(b -> b.getBuildlocation() == spot);
+            player.addResource(ResourceType.WOOD, 1);
+            player.addResource(ResourceType.BRICK, 1);
+            player.addResource(ResourceType.SHEEP, 1);
+            player.addResource(ResourceType.WHEAT, 1);
+            player.removeVictoryPoint();
+            System.out.println(turn.formatAction(player, "undid settlement at node " + lastNode));
+
+        } else if (lastAction.equals("city")) {
+            Intersection spot = board.getIntersection(lastNode);
+            Settlement s = new Settlement(spot, player);
+            spot.setBuilding(s);
+            player.getPlayerBuildings().removeIf(b -> b.getBuildlocation() == spot && b.getBuildingType() == Building.BuildingType.CITY);
+            player.getPlayerBuildings().add(s);
+            player.addResource(ResourceType.WHEAT, 2);
+            player.addResource(ResourceType.ORE, 3);
+            player.removeVictoryPoint();
+            System.out.println(turn.formatAction(player, "undid city upgrade at node " + lastNode));
+
+        } else if (lastAction.equals("road")) {
+            board.removeRoad(lastStart, lastEnd, player);
+            player.addResource(ResourceType.BRICK, 1);
+            player.addResource(ResourceType.WOOD, 1);
+            System.out.println(turn.formatAction(player, "undid road from " + lastStart + " to " + lastEnd));
+        }
+    }
+
+    @Override
+    public boolean endsTurn() { return false; }
+
+    @Override
+    public boolean requiresRoll() { return true; }
 }

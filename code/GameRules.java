@@ -12,7 +12,8 @@ class GameRules {
         return true;
     }
 
-    // True if this corner is empty and every neighbour corner is also empty (distance rule).
+    // True if this corner is empty and every neighbour corner is also empty
+    // (distance rule).
     public boolean checkEmptyIntersections(int intersectionID, Board board) {
         Intersection currentIntersection = board.getIntersection(intersectionID);
 
@@ -46,7 +47,8 @@ class GameRules {
         return false;
     }
 
-    // Edge must exist on board, not be built yet, and touch your settlement or one of your roads.
+    // Edge must exist on board, not be built yet, and touch your settlement or one
+    // of your roads.
     public boolean checkRoadPlacement(Edge roadEdge, Player player, Board board) {
         int startID = roadEdge.getStart();
         int endID = roadEdge.getEnd();
@@ -84,7 +86,7 @@ class GameRules {
                 if (shared.getBuilding() == null || shared.getPlayer() == player) {
                     return true;
                 }
-                
+
             } else if (endPoint == startID || endPoint == endID) {
                 int sharedNode;
                 if (endPoint == startID) {

@@ -13,8 +13,7 @@ class List extends Command {
         boolean first = true;
         for (java.util.Map.Entry<ResourceType, Integer> entry : resources.entrySet()) {
             if (entry.getValue() > 0) {
-                if (!first)
-                    sb.append(", ");
+                if (!first) sb.append(", ");
                 sb.append(entry.getKey()).append("=").append(entry.getValue());
                 first = false;
             }
