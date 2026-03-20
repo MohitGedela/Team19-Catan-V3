@@ -195,4 +195,11 @@ class Board {
         }
         return playersList;
     }
+
+    public void removeRoad(int start, int end, Player player) {
+        builtEdges.removeIf(e -> (e[0] == start && e[1] == end) || (e[0] == end && e[1] == start));
+        player.getPlayerRoads().removeIf(r ->
+            (r.getLocation().getStart() == start && r.getLocation().getEnd() == end) ||
+            (r.getLocation().getStart() == end && r.getLocation().getEnd() == start));
+    }
 }
