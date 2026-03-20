@@ -89,6 +89,13 @@ class Demonstrator {
         // so Player no longer needs a reference to the visualizer.
         Turn turn = new Turn(dice, production, board, players, visualizer);
 
+        // give HumanPlayer access to turn for initial placement commands
+        for (Player p : players) {
+            if (p instanceof HumanPlayer) {
+                ((HumanPlayer) p).setTurn(turn);
+            }
+        }
+
         Scanner inputScanner = new Scanner(System.in);
 
         // *** INITIAL PLACEMENT PHASE ***

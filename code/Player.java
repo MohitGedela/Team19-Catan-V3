@@ -49,6 +49,10 @@ abstract class Player {
         victoryPoints++;
     }
 
+    public void removeVictoryPoint() {
+        victoryPoints--;
+    }
+
     public int getPlayerID() {
         return playerID;
     }
