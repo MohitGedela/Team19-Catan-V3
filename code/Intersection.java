@@ -1,5 +1,4 @@
 package code;
-
 class Intersection {
     private int intersectionID;
     private Building intersectionBuilding;

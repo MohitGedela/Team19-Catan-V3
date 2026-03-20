@@ -1,3 +1,5 @@
+package code;
+
 abstract class Command {
     protected Player player;
     protected Board board;
@@ -15,8 +17,14 @@ abstract class Command {
 
     public abstract boolean execute();
 
-    public void undo() {}
+    public void undo() {
+    }
+
+    public boolean canUndo() {
+        return false;
+    }
 
     public abstract boolean endsTurn();
+
     public abstract boolean requiresRoll();
 }
