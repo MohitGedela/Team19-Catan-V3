@@ -18,7 +18,7 @@ class Go extends Command {
     }
 
     @Override
-    public boolean requiresRoll() { 
-        return true; 
+    public boolean requiresRoll() {
+        return true;
     }
 }

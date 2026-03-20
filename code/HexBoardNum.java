@@ -1,5 +1,7 @@
+package code;
+
 class HexBoardNum {
-    
+
     private int mappedNum;
 
     public HexBoardNum(int hexNum) {

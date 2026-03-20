@@ -1,3 +1,5 @@
+package code;
+
 class Intersection {
     private int intersectionID;
     private Building intersectionBuilding;
@@ -11,7 +13,7 @@ class Intersection {
 
     public int getIntersectionLocation() {
         return intersectionID;
-    }    
+    }
 
     public void setBuilding(Building building) {
         intersectionBuilding = building;
