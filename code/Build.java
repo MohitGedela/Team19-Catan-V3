@@ -1,3 +1,5 @@
+package code;
+
 class Build extends Command {
     private String input;
 
@@ -81,7 +83,8 @@ class Build extends Command {
             Intersection spot = board.getIntersection(lastNode);
             Settlement s = new Settlement(spot, player);
             spot.setBuilding(s);
-            player.getPlayerBuildings().removeIf(b -> b.getBuildlocation() == spot && b.getBuildingType() == Building.BuildingType.CITY);
+            player.getPlayerBuildings()
+                    .removeIf(b -> b.getBuildlocation() == spot && b.getBuildingType() == Building.BuildingType.CITY);
             player.getPlayerBuildings().add(s);
             player.addResource(ResourceType.WHEAT, 2);
             player.addResource(ResourceType.ORE, 3);
@@ -97,8 +100,17 @@ class Build extends Command {
     }
 
     @Override
-    public boolean endsTurn() { return false; }
+    public boolean canUndo() {
+        return true;
+    }
 
     @Override
-    public boolean requiresRoll() { return true; }
+    public boolean endsTurn() {
+        return false;
+    }
+
+    @Override
+    public boolean requiresRoll() {
+        return true;
+    }
 }

@@ -1,3 +1,5 @@
+package code;
+
 class List extends Command {
 
     List(Player player, Board board, Turn turn) {
@@ -11,22 +13,29 @@ class List extends Command {
         boolean first = true;
         for (java.util.Map.Entry<ResourceType, Integer> entry : resources.entrySet()) {
             if (entry.getValue() > 0) {
-                if (!first) sb.append(", ");
+                if (!first)
+                    sb.append(", ");
                 sb.append(entry.getKey()).append("=").append(entry.getValue());
                 first = false;
             }
         }
-        if (first) sb.append("(empty)");
+        if (first)
+            sb.append("(empty)");
         System.out.println(turn.formatAction(player, sb.toString()));
         return true;
     }
 
     @Override
-    public void undo() {}
+    public void undo() {
+    }
 
     @Override
-    public boolean endsTurn() { return false; }
+    public boolean endsTurn() {
+        return false;
+    }
 
     @Override
-    public boolean requiresRoll() { return true; }
+    public boolean requiresRoll() {
+        return true;
+    }
 }

@@ -1,8 +1,10 @@
+package code;
+
 class Road {
     private Player owner;
     private Edge location;
 
-    public Road (Player owner, Edge location) {
+    public Road(Player owner, Edge location) {
         this.owner = owner;
         this.location = location;
     }

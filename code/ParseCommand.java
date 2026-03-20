@@ -1,3 +1,5 @@
+package code;
+
 class ParseCommand {
 
     public Command parse(String input, Player player, Board board, Turn turn) {

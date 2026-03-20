@@ -1,3 +1,4 @@
+package code;
 import java.util.List;
 
 // Checks if a spot is ok to build on (empty, not next to another building, or connected by your road).

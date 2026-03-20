@@ -1,5 +1,7 @@
+package code;
+
 abstract class HexTerrain {
-    
+
     private int hexID;
     private HexBoardNum hexNumber;
 
@@ -17,5 +19,6 @@ abstract class HexTerrain {
     }
 
     public abstract ResourceType produceResource();
+
     public abstract boolean productionStatus();
 }

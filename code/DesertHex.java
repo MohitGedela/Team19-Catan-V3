@@ -1,4 +1,6 @@
-class DesertHex extends HexTerrain{
+package code;
+
+class DesertHex extends HexTerrain {
 
     public DesertHex(int hexID) {
         super(hexID, null);

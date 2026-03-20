@@ -1,9 +1,10 @@
+package code;
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Robber {
-    
+
     private Board board;
     private Random random;
 

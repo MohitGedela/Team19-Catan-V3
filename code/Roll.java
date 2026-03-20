@@ -1,3 +1,5 @@
+package code;
+
 class Roll extends Command {
 
     Roll(Player player, Board board, Turn turn) {
@@ -12,15 +14,16 @@ class Roll extends Command {
     }
 
     @Override
-    public void undo() {}
-
-    @Override
-    public boolean endsTurn() { 
-        return false; 
+    public void undo() {
     }
 
     @Override
-    public boolean requiresRoll() { 
-        return false; 
+    public boolean endsTurn() {
+        return false;
+    }
+
+    @Override
+    public boolean requiresRoll() {
+        return false;
     }
 }
