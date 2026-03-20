@@ -51,4 +51,8 @@ class Turn {
     public Board getBoard() {
         return board;
     }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
 }
