@@ -1,14 +1,12 @@
 package code;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Scanner;
+
+import java.util.*;
 
 class ComputerPlayer extends Player {
     private Random random = new Random();
     private Agent agent;
 
-    public ComputerPlayer(int playerNum, int playerVP, List<Building> buildings, List<Road> roads,
+    public ComputerPlayer(int playerNum, int playerVP, ArrayList<Building> buildings, ArrayList<Road> roads,
             Map<ResourceType, Integer> resources) {
         super(playerNum, playerVP, buildings, roads, resources);
         this.agent = new Agent();

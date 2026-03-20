@@ -10,7 +10,7 @@ class ParseCommand {
             return new Go(player, board, turn);
         }
         if (input.matches("(?i)List")) {
-            return new List(player, board, turn);
+            return new ListCommand(player, board, turn);
         }
         if (input.matches("(?i)Build\\s+settlement\\s+\\d+")) {
             return new Build(input, player, board, turn);

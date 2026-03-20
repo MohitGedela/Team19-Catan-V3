@@ -1,8 +1,8 @@
 package code;
 
-class List extends Command {
+class ListCommand extends Command {
 
-    List(Player player, Board board, Turn turn) {
+    ListCommand(Player player, Board board, Turn turn) {
         super(player, board, turn);
     }
 
