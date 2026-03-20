@@ -7,11 +7,36 @@ import java.util.Scanner;
 class HumanPlayer extends Player {
 
     private ParseCommand parser;
+    private CommandHistory history = new CommandHistory();
+    private Turn currentTurn;
 
     public HumanPlayer(int playerNum, int playerVP, List<Building> buildings, List<Road> roads,
             Map<ResourceType, Integer> resources, ParseCommand parser) {
         super(playerNum, playerVP, buildings, roads, resources);
         this.parser = parser;
+    }
+
+    public void setTurn(Turn turn) {
+        this.currentTurn = turn;
+    }
+
+    private boolean executeCommand(Command command) {
+        if (command.execute()) {
+            history.push(command);
+            return true;
+        }
+        return false;
+    }
+
+    private void undo() {
+        if (history.isEmpty()) {
+            System.out.println("Nothing to undo.");
+            return;
+        }
+        Command command = history.pop();
+        if (command != null) {
+            command.undo();
+        }
     }
 
     @Override
@@ -27,9 +52,16 @@ class HumanPlayer extends Player {
             System.out.println("Build settlement [nodeID]");
             System.out.println("Build city [nodeID]");
             System.out.println("Build road [fromNodeID] [toNodeID]");
+            System.out.println("Undo");
 
             String input = scanner.nextLine().trim();
-            Command command = parser.parse(input);
+
+            if (input.equalsIgnoreCase("Undo")) {
+                undo();
+                continue;
+            }
+
+            Command command = parser.parse(input, this, board, turn);
 
             if (command == null) {
                 System.out.println("Invalid command, try again!");
@@ -46,15 +78,13 @@ class HumanPlayer extends Player {
                 continue;
             }
 
-            String result = command.execute(this, board, turn);
+            executeCommand(command);
 
-            if (command.endsTurn())
-                break;
+            if (command.endsTurn()) break;
 
             if (!command.requiresRoll() && !hasRolled) {
                 hasRolled = true;
             }
-            System.out.println(turn.formatAction(this, result));
         }
         return "";
     }
@@ -71,6 +101,13 @@ class HumanPlayer extends Player {
         while (true) {
             System.out.print("\nPlayer " + playerID + ", place your settlement (node 0-53): ");
             String input = scanner.nextLine().trim();
+
+            if (input.equalsIgnoreCase("Undo")) {
+                undo();
+                settlementNode = -1;
+                continue;
+            }
+
             try {
                 int nodeID = Integer.parseInt(input);
                 Intersection spot = board.getIntersection(nodeID);
@@ -78,8 +115,8 @@ class HumanPlayer extends Player {
                     System.out.println("Invalid node.");
                     continue;
                 }
-                if (board.placeSettlement(spot, this)) {
-                    addVictoryPoint();
+                PlaceInitialSettlement cmd = new PlaceInitialSettlement(nodeID, this, board, currentTurn);
+                if (executeCommand(cmd)) {
                     settlementNode = nodeID;
                     visualizer.refresh();
                     break;
@@ -92,17 +129,52 @@ class HumanPlayer extends Player {
         }
 
         while (true) {
-            System.out.print(
-                    "Player " + playerID + ", place your road (enter adjacent node to " + settlementNode + "): ");
+            System.out.print("Place your road (enter adjacent node to " + settlementNode + ") or type Undo: ");
             String input = scanner.nextLine().trim();
+
+            if (input.equalsIgnoreCase("Undo")) {
+                undo(); // undoes the settlement
+                settlementNode = -1;
+                // drop back into settlement placement loop
+                while (true) {
+                    System.out.print("\nPlayer " + playerID + ", place your settlement (node 0-53): ");
+                    String settlementInput = scanner.nextLine().trim();
+
+                    if (settlementInput.equalsIgnoreCase("Undo")) {
+                        undo();
+                        continue;
+                    }
+
+                    try {
+                        int nodeID = Integer.parseInt(settlementInput);
+                        Intersection spot = board.getIntersection(nodeID);
+                        if (spot == null || nodeID < 0 || nodeID > 53) {
+                            System.out.println("Invalid node.");
+                            continue;
+                        }
+                        PlaceInitialSettlement cmd = new PlaceInitialSettlement(nodeID, this, board, currentTurn);
+                        if (executeCommand(cmd)) {
+                            settlementNode = nodeID;
+                            visualizer.refresh();
+                            break;
+                        } else {
+                            System.out.println("Invalid spot, try another.");
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Enter a valid number.");
+                    }
+                }
+                continue;
+            }
+
             try {
                 int endNode = Integer.parseInt(input);
                 if (!board.isValidEdge(settlementNode, endNode)) {
                     System.out.println("Not adjacent to your settlement.");
                     continue;
                 }
-                Edge edge = new Edge(settlementNode, endNode);
-                if (board.placeRoad(edge, this)) {
+                PlaceInitialRoad cmd = new PlaceInitialRoad(settlementNode, endNode, this, board, currentTurn);
+                if (executeCommand(cmd)) {
                     visualizer.refresh();
                     break;
                 } else {

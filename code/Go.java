@@ -1,15 +1,20 @@
-package code;
+class Go extends Command {
 
-class Go implements Command {
-
-    @Override
-    public String execute(Player player, Board board, Turn turn) {
-        return "ended turn";
+    Go(Player player, Board board, Turn turn) {
+        super(player, board, turn);
     }
 
     @Override
-    public boolean endsTurn() {
+    public boolean execute() {
         return true;
+    }
+
+    @Override
+    public void undo() {}
+
+    @Override
+    public boolean endsTurn() { 
+        return true; 
     }
 
     @Override
