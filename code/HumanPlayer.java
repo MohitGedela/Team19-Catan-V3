@@ -1,9 +1,11 @@
+package code;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 class HumanPlayer extends Player {
-    
+
     private ParseCommand parser;
 
     public HumanPlayer(int playerNum, int playerVP, List<Building> buildings, List<Road> roads,
@@ -38,7 +40,7 @@ class HumanPlayer extends Player {
                 System.out.println("You must roll first!");
                 continue;
             }
-            
+
             if (!command.requiresRoll() && hasRolled) {
                 System.out.println("You already rolled this turn!");
                 continue;

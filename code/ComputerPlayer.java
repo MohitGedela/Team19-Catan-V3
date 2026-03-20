@@ -1,3 +1,5 @@
+package code;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +10,8 @@ class ComputerPlayer extends Player {
     private Random random = new Random();
     private Agent agent;
 
-    public ComputerPlayer(int playerNum, int playerVP, List<Building> buildings, List<Road> roads, Map<ResourceType, Integer> resources) {
+    public ComputerPlayer(int playerNum, int playerVP, List<Building> buildings, List<Road> roads,
+            Map<ResourceType, Integer> resources) {
         super(playerNum, playerVP, buildings, roads, resources);
         this.agent = new Agent();
     }
@@ -22,9 +25,11 @@ class ComputerPlayer extends Player {
             return rollResult;
         }
 
-        // R3.3: check constraints first
-        ConstraintChecker checker = new ConstraintChecker(board, turn.getPlayers());
-        String constraintResult = checker.check(this);
+        // R3.3: check constraints via Chain of Responsibility
+        ConstraintHandler chain = new CardLimitHandler();
+        chain.setNext(new RoadGapHandler()).setNext(new LongestRoadHandler());
+
+        String constraintResult = chain.handle(this, board, turn.getPlayers());
         if (constraintResult != null) {
             return rollResult + ", " + constraintResult;
         }
@@ -38,11 +43,13 @@ class ComputerPlayer extends Player {
         List<Integer> validSpots = new ArrayList<>();
         for (int i = 0; i <= 53; i++) {
             Intersection spot = board.getIntersection(i);
-            if (spot == null) continue;
+            if (spot == null)
+                continue;
             boolean valid = spot.getBuilding() == null;
             for (int neighbour : board.getNeighbouringIntersections(i)) {
                 Intersection n = board.getIntersection(neighbour);
-                if (n == null) continue;
+                if (n == null)
+                    continue;
                 if (n.getBuilding() != null) {
                     valid = false;
                     break;

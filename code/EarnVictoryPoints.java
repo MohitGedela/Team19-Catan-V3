@@ -1,3 +1,5 @@
+package code;
+
 public class EarnVictoryPoints implements Rule {
 
     private static final double VALUE = 1.0;

@@ -1,3 +1,5 @@
+package code;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +15,7 @@ abstract class Player {
     protected ResourceManager resourceManager;
 
     public Player(int playerNum, int playerVP, List<Building> buildings, List<Road> roads,
-        Map<ResourceType, Integer> resources) {
+            Map<ResourceType, Integer> resources) {
         playerID = playerNum;
         victoryPoints = playerVP;
         playerBuildings = buildings;
@@ -75,7 +77,7 @@ abstract class Player {
         int nodeId = buildIntersection.getIntersectionLocation();
 
         if (!checkResource(ResourceType.WOOD, 1) || !checkResource(ResourceType.BRICK, 1)
-            || !checkResource(ResourceType.SHEEP, 1) || !checkResource(ResourceType.WHEAT, 1)) {
+                || !checkResource(ResourceType.SHEEP, 1) || !checkResource(ResourceType.WHEAT, 1)) {
             return "failed to build settlement at node " + nodeId + " (insufficient resources)";
         }
 
@@ -147,6 +149,8 @@ abstract class Player {
     }
 
     public abstract String takeAction(Board board, Turn turn);
+
     public abstract void initialSetup(Board board, Scanner scanner, Visualizer visualizer);
+
     public abstract boolean requiresGoPrompt();
 }

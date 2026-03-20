@@ -1,3 +1,5 @@
+package code;
+
 class Roll implements Command {
     @Override
     public String execute(Player player, Board board, Turn turn) {
@@ -5,8 +7,12 @@ class Roll implements Command {
     }
 
     @Override
-    public boolean endsTurn() { return false; }
+    public boolean endsTurn() {
+        return false;
+    }
 
     @Override
-    public boolean requiresRoll() { return false; }
+    public boolean requiresRoll() {
+        return false;
+    }
 }

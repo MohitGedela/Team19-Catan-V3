@@ -1,3 +1,5 @@
+package code;
+
 class Settlement extends Building {
 
     public Settlement(Intersection settlementIntersection, Player owner) {

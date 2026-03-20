@@ -1,3 +1,5 @@
+package code;
+
 public class BuildSomething implements Rule {
 
     private static final double VALUE = 0.8;

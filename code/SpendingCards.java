@@ -1,10 +1,27 @@
+package code;
+
 public class SpendingCards implements Rule {
-    private static final double VALUE = 0.5;
-    private static final int MAX_CARDS = 5;
+    private final double VALUE = 0.5;
+    private final int MAX_CARDS = 5;
 
     @Override
     public double evaluate(Player player) {
-        if (player.getTotalResources() >= MAX_CARDS) {
+        int totalCards = player.getTotalResources();
+
+        if (player.checkResource(ResourceType.WHEAT, 2) && player.checkResource(ResourceType.ORE, 3)
+                && totalCards - 5 < MAX_CARDS) {
+            return VALUE;
+        }
+
+        if (player.checkResource(ResourceType.WOOD, 1) && player.checkResource(ResourceType.BRICK, 1)
+                && player.checkResource(ResourceType.SHEEP, 1)
+                && player.checkResource(ResourceType.WHEAT, 1)
+                && totalCards - 4 < MAX_CARDS) {
+            return VALUE;
+        }
+
+        if (player.checkResource(ResourceType.BRICK, 1) && player.checkResource(ResourceType.WOOD, 1)
+                && totalCards - 2 < MAX_CARDS) {
             return VALUE;
         }
         return 0.0;

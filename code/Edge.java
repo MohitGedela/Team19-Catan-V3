@@ -1,5 +1,7 @@
+package code;
+
 class Edge {
-    
+
     private int start;
     private int end;
     private boolean isEmpty = true;
@@ -18,7 +20,7 @@ class Edge {
     }
 
     public int[] getLocation() {
-        return new int[] {start, end};
+        return new int[] { start, end };
     }
 
     public void setNotEmpty() {

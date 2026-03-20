@@ -1,5 +1,7 @@
+package code;
+
 class Build implements Command {
-    
+
     private String input;
 
     public Build(String input) {
@@ -7,10 +9,14 @@ class Build implements Command {
     }
 
     @Override
-    public boolean endsTurn() { return false; }
+    public boolean endsTurn() {
+        return false;
+    }
 
     @Override
-    public boolean requiresRoll() { return true; }
+    public boolean requiresRoll() {
+        return true;
+    }
 
     @Override
     public String execute(Player player, Board board, Turn turn) {
