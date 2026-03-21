@@ -17,6 +17,8 @@
 ## Overview
 <p align="justify">
 This project extends the Catan simulator from Assignment 2 to incorporate design patterns and simple machine intelligence. Three design patterns were identified, introduced into the UML design, and implemented in the codebase. An undo/redo system was added for the human player using the Command pattern, and a rule-based AI agent was designed using the Strategy pattern. The Observer pattern was introduced to decouple the Visualizer from the game loop. All changes were driven by the existing UML class diagram and validated through the demonstrator.
+
+R3.3 is handled first via a chain of responsibility: if a constraint applies and can be resolved (e.g. a build succeeds), that ends the constraint phase; otherwise the bot uses R3.2’s evaluation-based rules to choose an action.
 </p>
 
 ---
