@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * R3.2 — Strategy pattern: context that holds concrete {@link Strategy} objects and picks one to run.
+ * R3.2 — Strategy pattern: context that holds concrete {@link Strategy} objects
+ * and picks one to run.
  */
 public class Agent {
 

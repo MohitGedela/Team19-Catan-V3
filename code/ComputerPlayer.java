@@ -27,10 +27,12 @@ class ComputerPlayer extends Player {
 
         String constraintResult = chain.handle(this, board, turn.getPlayers());
         if (constraintResult != null) {
-            return rollResult + ", " + constraintResult;
+            if (constraintResult.contains("built") || constraintResult.contains("upgraded")) {
+                return rollResult + ", " + constraintResult;
+            }
         }
 
-        // R3.2: no constraint fired, use agent rule evaluation
+        // R3.2: no constraint fired or constraint failed, use agent rule evaluation
         return agent.act(this, board, turn);
     }
 
