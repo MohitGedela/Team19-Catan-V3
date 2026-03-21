@@ -1,5 +1,7 @@
 package code;
 
+import java.util.Iterator;
+
 class Build extends Command {
     private String input;
 
@@ -71,7 +73,13 @@ class Build extends Command {
             Intersection spot = board.getIntersection(lastNode);
             spot.setBuilding(null);
             spot.setOwner(null);
-            player.getPlayerBuildings().removeIf(b -> b.getBuildlocation() == spot);
+            Iterator<Building> sit = player.getPlayerBuildings().iterator();
+            while (sit.hasNext()) {
+                Building b = sit.next();
+                if (b.getBuildlocation() == spot) {
+                    sit.remove();
+                }
+            }
             player.addResource(ResourceType.WOOD, 1);
             player.addResource(ResourceType.BRICK, 1);
             player.addResource(ResourceType.SHEEP, 1);
@@ -83,8 +91,13 @@ class Build extends Command {
             Intersection spot = board.getIntersection(lastNode);
             Settlement s = new Settlement(spot, player);
             spot.setBuilding(s);
-            player.getPlayerBuildings()
-                    .removeIf(b -> b.getBuildlocation() == spot && b.getBuildingType() == Building.BuildingType.CITY);
+            Iterator<Building> cit = player.getPlayerBuildings().iterator();
+            while (cit.hasNext()) {
+                Building b = cit.next();
+                if (b.getBuildlocation() == spot && b.getBuildingType() == Building.BuildingType.CITY) {
+                    cit.remove();
+                }
+            }
             player.getPlayerBuildings().add(s);
             player.addResource(ResourceType.WHEAT, 2);
             player.addResource(ResourceType.ORE, 3);

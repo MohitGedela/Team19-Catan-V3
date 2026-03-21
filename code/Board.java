@@ -2,6 +2,7 @@ package code;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 import java.util.List;
@@ -204,9 +205,20 @@ class Board {
     }
 
     public void removeRoad(int start, int end, Player player) {
-        builtEdges.removeIf(e -> (e[0] == start && e[1] == end) || (e[0] == end && e[1] == start));
-        player.getPlayerRoads()
-                .removeIf(r -> (r.getLocation().getStart() == start && r.getLocation().getEnd() == end) ||
-                        (r.getLocation().getStart() == end && r.getLocation().getEnd() == start));
+        Iterator<int[]> edgeIt = builtEdges.iterator();
+        while (edgeIt.hasNext()) {
+            int[] e = edgeIt.next();
+            if ((e[0] == start && e[1] == end) || (e[0] == end && e[1] == start)) {
+                edgeIt.remove();
+            }
+        }
+        Iterator<Road> roadIt = player.getPlayerRoads().iterator();
+        while (roadIt.hasNext()) {
+            Road r = roadIt.next();
+            if ((r.getLocation().getStart() == start && r.getLocation().getEnd() == end)
+                    || (r.getLocation().getStart() == end && r.getLocation().getEnd() == start)) {
+                roadIt.remove();
+            }
+        }
     }
 }

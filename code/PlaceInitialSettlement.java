@@ -1,5 +1,7 @@
 package code;
 
+import java.util.Iterator;
+
 class PlaceInitialSettlement extends Command {
     private int nodeID;
 
@@ -26,7 +28,13 @@ class PlaceInitialSettlement extends Command {
             Intersection spot = board.getIntersection(lastNode);
             spot.setBuilding(null);
             spot.setOwner(null);
-            player.getPlayerBuildings().removeIf(b -> b.getBuildlocation() == spot);
+            Iterator<Building> it = player.getPlayerBuildings().iterator();
+            while (it.hasNext()) {
+                Building b = it.next();
+                if (b.getBuildlocation() == spot) {
+                    it.remove();
+                }
+            }
             player.removeVictoryPoint();
             System.out.println("Undid initial settlement at node " + lastNode);
         }
