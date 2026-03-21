@@ -152,7 +152,7 @@ Team19-Catan-V3/
 ---
 
 ## Our Process
-- **Project Board:** [View our Kanban Board](https://github.com/users/MohitGedela/projects/5/views/1)
+- **Project Board:** [View our Kanban Board](https://github.com/users/MohitGedela/projects/10)
 - **Tasks:** Work items created and assigned as GitHub Issues throughout the project
 - **Merging:** Features developed on separate branches and merged through pull requests
 
